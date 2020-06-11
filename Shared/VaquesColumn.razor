@@ -11,13 +11,13 @@
             </div>
         </div>
         <div class="border-b shadow-bot">
-            <img class="relative flex" src=@ImatgeSuperior alt="camp">
+            <img class="relative flex h-24 object-contain w-full" src=@ImatgeSuperior alt="camp">
         </div>
         <div class="relative mt-2 mb-4 overflow-x-hidden overflow-y-auto scrolling-touch lg:max-h-sm scrollbar-w-2 scrollbar-track-gray-lighter scrollbar-thumb-rounded scrollbar-thumb-gray">
             <ul id="vaques" class="flex flex-col inline-block w-full px-2 select-none">
             @foreach (var vaca in Vaques)
             {
-                <VacaLine HaveMarca=@HaveMarca ImatgeVaca=@ImatgeVaca Vaca=@vaca />
+                <VacaLine HaveMarca=@HaveMarca ImatgeVaca=@ImatgeVaca Vaca=@vaca OnClick="OnClick" />
             }
             </ul>
         </div>
@@ -39,5 +39,7 @@
 
     [Parameter]
     public List<Vaca> Vaques { get; set; } = new List<Vaca>();
+
+    [Parameter] public EventCallback<string> OnClick { get; set; }
 
 }

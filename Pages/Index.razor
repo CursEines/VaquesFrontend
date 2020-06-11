@@ -3,6 +3,43 @@
 @page "/"
 @inherits VaquesData
 
-<ColumnaVaques Amplada="w-1/4" HaveMarca=true Vaques=@Camp ImatgeSuperior=@imatgeCamp />
-<ColumnaVaques Amplada="w-2/4" Vaques=@Camio ImatgeSuperior=@imatgeCamp  />
-<ColumnaVaques Amplada="w-1/4" Vaques=@Ciutat ImatgeSuperior=@imatgeCamp  />
+<div class="flex-1 bg-white flex-col sm:flew-row .border-2" id="main">
+    <!-- Columnes -->
+    <div class="flex w-screen bg-white h-screen">
+        <VaquesColumn Amplada="w-1/4" HaveMarca=true Vaques=@Camp ImatgeSuperior=@imatgeCamp OnClick="MouVacaAlCamio" />
+        <VaquesColumn Amplada="w-2/4" Vaques=@Camio ImatgeSuperior=@imatgeCamio OnClick="TornaVacaAlCamp" />
+        <VaquesColumn Amplada="w-1/4" Vaques=@Ciutat ImatgeSuperior=@imatgeCiutat OnClick="NoFacisRes" />
+    </div>
+</div>
+<Peu Money="@Diners"/>
+
+
+@code {
+    void MouVacaAlCamio(string nomVaca)
+    {
+        var vaca = Camp.FirstOrDefault(v => v.Nom == nomVaca);
+        Camp = Camp.Where(x => x.Nom != nomVaca).ToList();
+        Camio.Add(vaca);
+    }
+
+    void TornaVacaAlCamp(string nomVaca)
+    {
+        var vaca = Camio.FirstOrDefault(v => v.Nom == nomVaca);
+        Camio = Camio.Where(x => x.Nom != nomVaca).ToList();
+        Camp.Add(vaca);
+    }
+
+    void EnviaLesVaquesALaCiutat()
+    {
+        var litres = Camio.Sum(v => v.Pes * v.Raça.LitresPerKg);
+        Ciutat.AddRange(Camio);
+        Camio.Clear();
+        Diners = Diners + litres;
+        
+    }
+
+    void NoFacisRes(string x)
+    {
+
+    }
+}
