@@ -7,7 +7,7 @@
     <!-- Columnes -->
     <div class="flex w-screen bg-white h-screen">
         <VaquesColumn Amplada="w-1/4" HaveMarca=true Vaques=@Camp ImatgeSuperior=@imatgeCamp OnClick="MouVacaAlCamio" />
-        <VaquesColumn Amplada="w-2/4" Vaques=@Camio ImatgeSuperior=@imatgeCamio OnClick="TornaVacaAlCamp" />
+        <VaquesColumnExtended Amplada="w-2/4 bg-gray-300" Vaques=@Camio ImatgeSuperior=@imatgeCamio OnClick="TornaVacaAlCamp" />
         <VaquesColumn Amplada="w-1/4" Vaques=@Ciutat ImatgeSuperior=@imatgeCiutat OnClick="NoFacisRes" />
     </div>
 </div>
@@ -35,7 +35,7 @@
         Ciutat.AddRange(Camio);
         Camio.Clear();
         Diners = Diners + litres;
-        
+
     }
 
     void NoFacisRes(string x)

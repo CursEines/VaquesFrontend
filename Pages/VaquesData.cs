@@ -20,19 +20,19 @@ namespace vacawasm
 
         protected override async Task OnInitializedAsync()
         {
-            // Recuperar les dades 
+            // Recuperar les dades
             Camp.Add(new Vaca()
             {
                 Nom = "Pepa",
                 Pes = 350.3,
-                Raça = new Raça() { Nom = "Holdstein", LitresPerKg = 4.3 }
+                RaÃ§a = new RaÃ§a() { Nom = "Holdstein", LitresPerKg = 4.3 }
             });
         }
 
         public void move(Vaca vaca)
         {
-            
-            
+
+
         }
         protected double Diners;
     }
