@@ -11,7 +11,7 @@
         <VaquesColumn Amplada="w-1/4" Vaques=@Ciutat ImatgeSuperior=@imatgeCiutat OnClick="NoFacisRes" />
     </div>
 </div>
-<Peu Litres="@Litres"/>
+<Peu Litres="@Litres" OnClick="EnviaLesVaquesALaCiutat"/>
 
 
 @code {
@@ -31,7 +31,7 @@
         Camp.Add(vaca);
     }
 
-    void EnviaLesVaquesALaCiutat()
+    void EnviaLesVaquesALaCiutat(string _)
     {
         // http://localhost:4567/tocity
         var litres = Camio.Sum(v => v.Pes * v.Raça.LitresPerKg);
