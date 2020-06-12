@@ -8,15 +8,16 @@
       href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <style type="text/css">
+      @font-face {
+        font-family: "Hand";
+        src: url("/fonts/gloriahallelujah.ttf");
+      }
+    </style>
   </head>
-  <body class="flex flex-row sm:flex-col">
-    <app>Loading...</app>
+  <body class="flex flex-row sm:flex-col" style="font-family: Hand;">
+    <app>Carregant vaques ...</app>
 
-    <div id="blazor-error-ui">
-      An unhandled error has occurred.
-      <a href="" class="reload">Reload</a>
-      <a class="dismiss">🗙</a>
-    </div>
     <script src="_framework/blazor.webassembly.js"></script>
   </body>
 </html>

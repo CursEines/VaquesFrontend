@@ -7,38 +7,45 @@
     <!-- Columnes -->
     <div class="flex w-screen bg-white h-screen">
         <VaquesColumn Amplada="w-1/4" HaveMarca=true Vaques=@Camp ImatgeSuperior=@imatgeCamp OnClick="MouVacaAlCamio" />
-        <VaquesColumnExtended Amplada="w-2/4 bg-gray-300" Vaques=@Camio ImatgeSuperior=@imatgeCamio OnClick="TornaVacaAlCamp" />
+        <VaquesColumnExtended Amplada="w-2/4" Vaques=@Camio ImatgeSuperior=@imatgeCamio OnClick="TornaVacaAlCamp" />
         <VaquesColumn Amplada="w-1/4" Vaques=@Ciutat ImatgeSuperior=@imatgeCiutat OnClick="NoFacisRes" />
     </div>
 </div>
-<Peu Litres="@Litres" OnClick="EnviaLesVaquesALaCiutat"/>
+<Peu Litres="@Litres" Viatges=@Viatges OnClick="EnviaLesVaquesALaCiutat"/>
 
 
 @code {
-    void MouVacaAlCamio(string nomVaca)
+    async Task MouVacaAlCamio(string nomVaca)
     {
+        await Task.Delay(1);
         // http://localhost:4567/vaques/camp/:nomVaca
         var vaca = Camp.FirstOrDefault(v => v.Nom == nomVaca);
         Camp = Camp.Where(x => x.Nom != nomVaca).ToList();
         Camio.Add(vaca);
     }
 
-    void TornaVacaAlCamp(string nomVaca)
+    async Task TornaVacaAlCamp(string nomVaca)
     {
+        await Task.Delay(1);
         // http://localhost:4567/vaques/camio/:nomVaca
         var vaca = Camio.FirstOrDefault(v => v.Nom == nomVaca);
         Camio = Camio.Where(x => x.Nom != nomVaca).ToList();
         Camp.Add(vaca);
     }
 
-    void EnviaLesVaquesALaCiutat(string _)
+    async Task EnviaLesVaquesALaCiutat()
     {
-        // http://localhost:4567/tocity
-        var litres = Camio.Sum(v => v.Pes * v.Raça.LitresPerKg);
-        Ciutat.AddRange(Camio);
-        Camio.Clear();
-        Litres = Litres + litres;
+        await Task.Delay(1);
 
+        if (Camio.Any())
+        {
+            // http://localhost:4567/tocity
+            var litres = Camio.Sum(v => v.Pes * v.Raça.LitresPerKg);
+            Ciutat.AddRange(Camio);
+            Camio.Clear();
+            Litres = Litres + litres;
+            Viatges = Viatges + 1;
+        }
     }
 
     void NoFacisRes(string x)
