@@ -26,35 +26,35 @@ namespace vacawasm
             {
                 Nom = "Pepa",
                 Pes = 350.3,
-                Raça = new Raça() { Nom = "Holdstein", LitresPerKg = 4.3 }
+                Raça = new Raça() { Nom = "Holdstein", LitresPerKg = 0.086 }
             });
 
             Camp.Add(new Vaca()
             {
                 Nom = "Rufa",
                 Pes = 378.0,
-                Raça = new Raça() { Nom = "Ayshire", LitresPerKg = 3.3 }
+                Raça = new Raça() { Nom = "Ayshire", LitresPerKg = 0.066 }
             });
 
             Camp.Add(new Vaca()
             {
                 Nom = "Flor",
                 Pes = 450.9,
-                Raça = new Raça() { Nom = "Jersey", LitresPerKg = 3.9 }
+                Raça = new Raça() { Nom = "Jersey", LitresPerKg = 0.078 }
             });
 
             Camp.Add(new Vaca()
             {
                 Nom = "Toñi",
                 Pes = 550.7,
-                Raça = new Raça() { Nom = "Holdstein", LitresPerKg = 4.3 }
+                Raça = new Raça() { Nom = "Holdstein", LitresPerKg = 0.086 }
             });
 
             Camp.Add(new Vaca()
             {
                 Nom = "Marisol",
                 Pes = 450.3,
-                Raça = new Raça() { Nom = "Simental", LitresPerKg = 3.1 }
+                Raça = new Raça() { Nom = "Simental", LitresPerKg = 0.062 }
             });
         }
 
