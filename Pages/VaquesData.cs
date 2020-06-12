@@ -16,8 +16,6 @@ namespace vacawasm
         protected string imatgeCiutat = "/img/ciutat.png";
         protected List<Vaca> Ciutat = new List<Vaca>();
 
-        double diners;
-
         protected override async Task OnInitializedAsync()
         {
             // Recuperar les dades de http://localhost:4567/start/6
@@ -60,6 +58,6 @@ namespace vacawasm
             });
         }
 
-        protected double Diners;
+        protected double Litres;
     }
 }
