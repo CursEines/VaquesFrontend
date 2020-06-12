@@ -33,7 +33,7 @@
 
     void EnviaLesVaquesALaCiutat()
     {
-        // http://localhost:4567/camio/tocity
+        // http://localhost:4567/tocity
         var litres = Camio.Sum(v => v.Pes * v.Raça.LitresPerKg);
         Ciutat.AddRange(Camio);
         Camio.Clear();
