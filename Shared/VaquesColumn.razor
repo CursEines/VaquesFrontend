@@ -11,10 +11,10 @@
             </div>
         </div>
         <div class="border-b shadow-bot">
-            <img class="relative flex h-24 object-contain w-full" src=@ImatgeSuperior alt="camp">
+            <img class="relative flex h-24 object-contain w-full" src=@ImatgeName alt="camp">
         </div>
         <div class="relative mt-2 mb-4 overflow-x-hidden overflow-y-auto scrolling-touch lg:max-h-sm scrollbar-w-2 scrollbar-track-gray-lighter scrollbar-thumb-rounded scrollbar-thumb-gray">
-            <ul id="vaques" class="flex flex-col inline-block w-full px-2 select-none">
+            <ul id="vaques-@ImatgeSuperior" class="flex flex-col inline-block w-full px-2 select-none">
             @foreach (var vaca in Vaques)
             {
                 <VacaLine HaveMarca=@HaveMarca ImatgeVaca=@ImatgeVaca Vaca=@vaca OnClick="OnClick" />
@@ -30,6 +30,8 @@
 
     [Parameter]
     public string ImatgeSuperior { get; set; }
+
+    public string ImatgeName => $"/img/{ImatgeSuperior}.png";
 
     [Parameter]
     public string ImatgeVaca { get; set; } = "/img/vaca.png";

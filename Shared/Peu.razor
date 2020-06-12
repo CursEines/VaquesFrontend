@@ -1,5 +1,9 @@
 <footer class="fixed h-20 bg-white w-full bottom-0 flex items-center justify-center border-black border-solid border-2">
-    <div class="sm:w-1/4 h-auto"></div>
+    <div class="sm:w-1/4 h-auto">
+        <div class="bg-black @Visible">
+            <p id="errorMessage" class="text-white">@Error</p>
+        </div>
+    </div>
     <div class="sm:w-2/4 h-auto">
         <button id="tocity" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" @onclick="OnClick">
             Envia el camió a la ciutat
@@ -13,6 +17,8 @@
 </footer>
 
 @code {
+
+
     public const double preu = 1.1;
     public double Money => Litres * preu;
 
@@ -23,4 +29,9 @@
     public double Litres { get; set; }
 
     [Parameter] public EventCallback OnClick { get; set; }
+
+    [Parameter]
+    public string Error { get; set; } = "";
+
+    public String Visible => string.IsNullOrEmpty(Error) ? "invisible" : "visible";
 }

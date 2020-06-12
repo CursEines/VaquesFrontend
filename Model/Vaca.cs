@@ -2,6 +2,11 @@ namespace vacawasm.Model
 {
     public class Vaca
     {
+        public Vaca()
+        {
+
+        }
+
         public string Nom { get; set; }
         public double Pes { get; set; }
 

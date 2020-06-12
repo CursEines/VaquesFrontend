@@ -8,9 +8,9 @@ namespace vacawasm
     public class VaquesData : ComponentBase
     {
 
-        protected string imatgeCamp = "/img/camp.png";
-        protected string imatgeCamio = "/img/camio.png";
-        protected string imatgeCiutat = "/img/ciutat.png";
+        protected string imatgeCamp = "camp";
+        protected string imatgeCamio = "camio";
+        protected string imatgeCiutat = "ciutat";
 
         protected List<Vaca> Camio = new List<Vaca>();
         protected List<Vaca> Camp = new List<Vaca>();
@@ -19,5 +19,6 @@ namespace vacawasm
         protected int Viatges;
         protected double Litres;
 
+        protected string Error = "";
     }
 }
