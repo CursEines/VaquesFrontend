@@ -1,7 +1,11 @@
 ﻿@namespace vacawasm
+@using vacawasm.Model
+@using System.Text.Json;
+@inject HttpClient Http
 
 @page "/"
 @inherits VaquesData
+@inject IHttpClientFactory _clientFactory
 
 <div class="flex-1 bg-white flex-col sm:flew-row .border-2" id="main">
     <!-- Columnes -->
@@ -15,22 +19,58 @@
 
 
 @code {
-    async Task MouVacaAlCamio(string nomVaca)
+    public async Task<(IEnumerable<Vaca>, bool)> OnGet(string url)
+    {
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+        var client = _clientFactory.CreateClient();
+        var response = await client.SendAsync(request);
+        if (response.IsSuccessStatusCode)
+        {
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+            var vaques = await JsonSerializer.DeserializeAsync<Vaca[]>(responseStream);
+            // resultat = "ok";
+            foreach (var v in vaques) { System.Console.WriteLine($"vaca {v} {v.Nom}, {v.Pes}, {v.Raça.Nom}"); }
+            return (vaques.ToList(), true);
+        }
+        else
+        {
+            // resultat = "errror";
+            return (null, false);
+        }
+    }
+    protected override async Task OnInitializedAsync()
     {
         await Task.Delay(1);
-        // http://localhost:4567/vaques/camp/:nomVaca
-        var vaca = Camp.FirstOrDefault(v => v.Nom == nomVaca);
-        Camp = Camp.Where(x => x.Nom != nomVaca).ToList();
-        Camio.Add(vaca);
+        Viatges = 0;
+        Litres = 0;
+        var (vaques, result) = await OnGet("http://localhost:4567/vaques/start/6");
+        if (result)
+        {
+
+            Camp = vaques.ToList();
+        }
+        else
+        {
+            System.Console.WriteLine("Error");
+        }
+
+    }
+    async Task MouVacaAlCamio(string nomVaca)
+    {
+        var resultat = await Http.GetFromJsonAsync<string>($"http://localhost:4567/vaques/posacamio/{nomVaca}");
+        System.Console.WriteLine("resultat");
+        Camp = await Http.GetFromJsonAsync<List<Vaca>>("http://localhost:4567/vaques/camp");
+        Camio = await Http.GetFromJsonAsync<List<Vaca>>("http://localhost:4567/vaques/camio");
+        await Task.Delay(1);
     }
 
     async Task TornaVacaAlCamp(string nomVaca)
     {
+        var resultat = await Http.GetFromJsonAsync<string>($"http://localhost:4567/vaques/posacamp/{nomVaca}");
+        Camp = await Http.GetFromJsonAsync<List<Vaca>>("http://localhost:4567/vaques/camp");
+        Camio = await Http.GetFromJsonAsync<List<Vaca>>("http://localhost:4567/vaques/camio");
         await Task.Delay(1);
-        // http://localhost:4567/vaques/camio/:nomVaca
-        var vaca = Camio.FirstOrDefault(v => v.Nom == nomVaca);
-        Camio = Camio.Where(x => x.Nom != nomVaca).ToList();
-        Camp.Add(vaca);
     }
 
     async Task EnviaLesVaquesALaCiutat()
@@ -39,10 +79,10 @@
 
         if (Camio.Any())
         {
+            var litres = await Http.GetFromJsonAsync<double>($"http://localhost:4567/vaques/tocity");
+            Ciutat = await Http.GetFromJsonAsync<List<Vaca>>("http://localhost:4567/vaques/ciutat");
+            Camio = await Http.GetFromJsonAsync<List<Vaca>>("http://localhost:4567/vaques/camio");
             // http://localhost:4567/tocity
-            var litres = Camio.Sum(v => v.Pes * v.Raça.LitresPerKg);
-            Ciutat.AddRange(Camio);
-            Camio.Clear();
             Litres = Litres + litres;
             Viatges = Viatges + 1;
         }
