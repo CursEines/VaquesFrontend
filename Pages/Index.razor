@@ -17,6 +17,7 @@
 @code {
     void MouVacaAlCamio(string nomVaca)
     {
+        // http://localhost:4567/vaques/camp/:nomVaca
         var vaca = Camp.FirstOrDefault(v => v.Nom == nomVaca);
         Camp = Camp.Where(x => x.Nom != nomVaca).ToList();
         Camio.Add(vaca);
@@ -24,6 +25,7 @@
 
     void TornaVacaAlCamp(string nomVaca)
     {
+        // http://localhost:4567/vaques/camio/:nomVaca
         var vaca = Camio.FirstOrDefault(v => v.Nom == nomVaca);
         Camio = Camio.Where(x => x.Nom != nomVaca).ToList();
         Camp.Add(vaca);
@@ -31,6 +33,7 @@
 
     void EnviaLesVaquesALaCiutat()
     {
+        // http://localhost:4567/camio/tocity
         var litres = Camio.Sum(v => v.Pes * v.Raça.LitresPerKg);
         Ciutat.AddRange(Camio);
         Camio.Clear();
