@@ -8,7 +8,7 @@ namespace vacawasm
     public class VaquesData : ComponentBase
     {
 
-        public const string RestServer = "http://rest:4567";
+        public const string RestServer = "http://localhost:4567";
         protected string imatgeCamp = "camp";
         protected string imatgeCamio = "camio";
         protected string imatgeCiutat = "ciutat";
